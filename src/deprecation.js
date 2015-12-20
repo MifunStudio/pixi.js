@@ -37,22 +37,6 @@ Object.defineProperties(core, {
     /**
      * @class
      * @private
-     * @name Stage
-     * @memberof PIXI
-     * @see PIXI.Container
-     * @deprecated since version 3.0.0
-     */
-    Stage: {
-        get: function()
-        {
-            console.warn('You do not need to use a PIXI Stage any more, you can simply render any container.');
-            return core.Container;
-        }
-    },
-
-    /**
-     * @class
-     * @private
      * @name DisplayObjectContainer
      * @memberof PIXI
      * @see PIXI.Container

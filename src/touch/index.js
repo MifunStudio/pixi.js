@@ -1,0 +1,1 @@
+var Hammer = require('hammerjs');

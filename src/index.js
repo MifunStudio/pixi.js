@@ -6,9 +6,14 @@ var core = module.exports = require('./core');
 // add core plugins.
 core.extras         = require('./extras');
 core.filters        = require('./filters');
-core.interaction    = require('./interaction');
+// core.interaction    = require('./interaction');
 core.loaders        = require('./loaders');
 core.mesh           = require('./mesh');
+
+// export mifun custom modules
+core.Stage = require('./Stage');
+core.Viewport = require('./Viewport').Viewport;
+core.FixedWidthViewport = require('./Viewport').FixedWidthViewport;
 
 // export a premade loader instance
 /**
