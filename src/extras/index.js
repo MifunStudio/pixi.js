@@ -8,11 +8,13 @@
 require('./cacheAsBitmap');
 require('./getChildByName');
 require('./getGlobalPosition');
+require('./eventBubbles');
 
 /**
  * @namespace PIXI.extras
  */
 module.exports = {
+    Event:          require('./Event'),
     MovieClip:      require('./MovieClip'),
     TilingSprite:   require('./TilingSprite'),
     BitmapText:     require('./BitmapText')

@@ -1,4 +1,4 @@
-var Event = require('./Event');
+var Event = require('../extras').Event;
 
 function TouchEvent(params) {
     Event.call(this, params.type, params.bubbles, params.data);

@@ -10,7 +10,6 @@ function Event(type, bubbles, data, canStopBubbles) {
     this._target = null;
     this._currentTarget = null;
     this._eventPhase = CAPTURE;
-    this._immediatePropagationStoped = false;
     this._propagationStoped = false;
     this._listenerRemove = false;
 }
@@ -70,20 +69,16 @@ Event.prototype.stopPropagation = function() {
     this._propagationStoped = true;
 };
 
-Event.prototype.isStopImmediatePropagation = function() {
-    return this._immediatePropagationStoped;
-};
-
-Event.prototype.stopImmediatePropagation = function() {
-    if(!this._canStopBubbles) {
-        return;
-    }
-    this._immediatePropagationStoped = true;
-    this._propagationStoped = true;
-};
-
 Event.prototype.removeCurrentListener = function() {
     this._listenerRemove = true;
+};
+
+Event.prototype.setTarget = function(target) {
+    this._target = target;
+};
+
+Event.prototype.setCurrentTarget = function(currentTarget) {
+    this._currentTarget = currentTarget;
 };
 
 module.exports = Event;

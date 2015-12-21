@@ -27,19 +27,25 @@ var stage = new PIXI.Stage({
     view: document.getElementById('main'),
     viewport: new PIXI.FixedWidthViewport(640)
 });
+stage.name = 'stage';
 stage.ticker.start();
 
+stage.on('tap', (e) => {
+    console.log(e.type, e.currentTarget.name);
+});
+
 var bunny = PIXI.Sprite.fromImage('../../test/textures/bunny.png');
+bunny.name = 'bunny';
 bunny.position.set(200, 200);
 bunny.interactive = true;
 bunny.on('touch', (e) => {
-    console.log(e);
+    console.log(e.type, e.currentTarget.name);
 });
 bunny.on('release', (e) => {
-    console.log(e);
+    console.log(e.type, e.currentTarget.name);
 });
 bunny.on('tap', (e) => {
-    console.log(e);
+    console.log(e.type, e.currentTarget.name);
 });
 
 stage.addChild(bunny);
