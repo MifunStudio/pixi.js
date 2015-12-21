@@ -50,6 +50,13 @@ Object.defineProperties(Stage.prototype, {
     }
 });
 
+Stage.prototype.emit = function() {
+    Container.prototype.emit.apply(this, arguments);
+    var args = Array.prototype.slice.call(arguments, 0);
+    args[0] = '*';
+    Container.prototype.emit.apply(this, args);
+};
+
 Stage.prototype.runStep = function() {
     this.renderer.render(this);
 };

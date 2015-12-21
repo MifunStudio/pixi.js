@@ -34,6 +34,10 @@ stage.on('tap', (e) => {
     console.log(e.type, e.currentTarget.name);
 });
 
+stage.on('*', (e) => {
+    console.log('*', e);
+});
+
 var bunny = PIXI.Sprite.fromImage('../../test/textures/bunny.png');
 bunny.name = 'bunny';
 bunny.position.set(200, 200);
