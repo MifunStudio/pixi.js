@@ -1,6 +1,6 @@
-function Viewport() {
+function Viewport() {}
 
-}
+Viewport.prototype.constructor = Viewport;
 
 Object.defineProperties(Viewport.prototype, {
     width: {
@@ -42,6 +42,7 @@ function FixedWidthViewport(fixedWidth) {
 }
 
 FixedWidthViewport.prototype = Object.create(Viewport.prototype);
+FixedWidthViewport.prototype.constructor = FixedWidthViewport;
 
 FixedWidthViewport.prototype.resizeViewport = function(screenWidth, screenHeight) {
     var width = this._fixedWidth;

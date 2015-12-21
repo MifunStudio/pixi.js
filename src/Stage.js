@@ -1,7 +1,8 @@
 var core = require('./core');
+var sharedTicker = core.ticker.shared;
 var Viewport = require('./Viewport').Viewport;
 var Container = core.Container;
-var sharedTicker = core.ticker.shared;
+var Touch = require('./touch').Touch;
 
 sharedTicker.autoStart = false;
 sharedTicker.stop();
@@ -9,7 +10,7 @@ sharedTicker.stop();
 function Stage(options) {
     Container.call(this);
     this._options = Object.assign({
-        backgroundColor: 0x000000
+        touchEanbled: true
     }, options);
     this._ticker = sharedTicker;
     this._renderer = core.autoDetectRenderer(960, 640, {
@@ -18,9 +19,13 @@ function Stage(options) {
     });
     this._viewport = options.viewport || new Viewport(960, 640);
     this._viewport._init(this);
+    this._touch = new Touch(this, this._options.gestures);
+    this._touch.enabled = this._options.touchEanbled;
+    this._ticker.add(this.runStep, this);
 }
 
 Stage.prototype = Object.create(Container.prototype);
+Stage.prototype.constructor = Stage;
 
 Object.defineProperties(Stage.prototype, {
     ticker: {
@@ -36,6 +41,11 @@ Object.defineProperties(Stage.prototype, {
     viewport: {
         get: function() {
             return this._viewport;
+        }
+    },
+    touch: {
+        get: function() {
+            return this._touch;
         }
     }
 });
