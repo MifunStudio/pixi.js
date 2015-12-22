@@ -74,7 +74,7 @@ Touch.prototype._onHammerEvent = function(e) {
         if (type === 'touch') {
             target = this._getUnderPointObject(stage, x, y);
             if (target) {
-                me._channelMap[identifier] = me._createDispatchChanel(target);
+                me._channelMap[identifier] = me._createDispatchChannel(target);
             }
         }
 
@@ -97,7 +97,7 @@ Touch.prototype._onHammerEvent = function(e) {
             if (type === 'touch') {
                 target = this._getUnderPointObject(stage, x, y);
                 if (target) {
-                    me._channelMap[identifier] = me._createDispatchChanel(target);
+                    me._channelMap[identifier] = me._createDispatchChannel(target);
                 }
             }
 
@@ -114,7 +114,7 @@ Touch.prototype._onHammerEvent = function(e) {
     }
 };
 
-Touch.prototype._createDispatchChanel = function(touchTarget) {
+Touch.prototype._createDispatchChannel = function(touchTarget) {
     var me = this;
     var stage = me._stage;
     var touchMoveDetection = true;
