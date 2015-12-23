@@ -25,34 +25,34 @@
 <script>
 var stage = new PIXI.Stage({
     view: document.getElementById('main'),
-    viewport: new PIXI.FixedWidthViewport(640)
+    viewport: new PIXI.FixedWidthViewport(640),
+    dragAndDrop: true
 });
 stage.name = 'stage';
 stage.ticker.start();
-
-stage.on('tap', (e) => {
-    console.log(e.type, e.currentTarget.name);
-});
-
-stage.on('*', (e) => {
-    console.log('*', e);
-});
 
 var bunny = PIXI.Sprite.fromImage('../../test/textures/bunny.png');
 bunny.name = 'bunny';
 bunny.position.set(200, 200);
 bunny.interactive = true;
-bunny.on('touch', (e) => {
-    console.log(e.type, e.currentTarget.name);
-});
-bunny.on('release', (e) => {
-    console.log(e.type, e.currentTarget.name);
-});
-bunny.on('tap', (e) => {
-    console.log(e.type, e.currentTarget.name);
-});
-
+bunny.draggable = true;
+bunny.onDragStart = function(e) {
+    e.setData({
+        a: 1
+    })
+};
 stage.addChild(bunny);
+
+var bunny2 = PIXI.Sprite.fromImage('../../test/textures/bunny.png');
+bunny2.name = 'bunny2';
+bunny2.position.set(400, 200);
+bunny2.interactive = true;
+bunny2.droppable = true;
+bunny2.onDrop = function(e) {
+    console.log(e);
+};
+stage.addChild(bunny2);
+
 </script>
 </body>
 </html>

@@ -3,6 +3,7 @@ var sharedTicker = core.ticker.shared;
 var Viewport = require('./Viewport').Viewport;
 var Container = core.Container;
 var Touch = require('./touch').Touch;
+var DnDManager = require('./touch').DnDManager;
 
 sharedTicker.autoStart = false;
 sharedTicker.stop();
@@ -10,7 +11,9 @@ sharedTicker.stop();
 function Stage(options) {
     Container.call(this);
     this._options = Object.assign({
-        touchEanbled: true
+        touchEanbled: true,
+        dragAndDrop: false,
+        gestures: this.gestures || (options.dragAndDrop ? 'tap panstart panmove panend pancancel' : 'tap')
     }, options);
     this._ticker = sharedTicker;
     this._renderer = core.autoDetectRenderer(960, 640, {
@@ -21,6 +24,9 @@ function Stage(options) {
     this._viewport._init(this);
     this._touch = new Touch(this, this._options.gestures);
     this._touch.enabled = this._options.touchEanbled;
+    if(this._options.dragAndDrop) {
+        this._dndManager = new DnDManager(this);
+    }
     this._ticker.add(this.runStep, this);
 }
 
@@ -46,6 +52,11 @@ Object.defineProperties(Stage.prototype, {
     touch: {
         get: function() {
             return this._touch;
+        }
+    },
+    dndManager: {
+        get: function() {
+            return this._dndManager;
         }
     }
 });

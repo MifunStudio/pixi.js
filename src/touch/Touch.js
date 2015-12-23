@@ -15,6 +15,7 @@ function Touch(stage, gestures) {
     this._channelMap = {};
     this._hammer = new Hammer(stage.renderer.view);
     this._hammer.on(this._parseGestrues(gestures), function(e) {
+        if(e.type === 'pan') return;
         if(e.type === 'hammer.input' && !e.isFinal && !e.isFirst) {
             return;
         }
