@@ -1,6 +1,7 @@
 var fs = require('fs');
 var gulp = require('gulp');
 var browserifyInc = require('browserify-incremental');
+var globalShim = require('browserify-global-shim');
 var watchify = require('watchify');
 var babelify = require('babelify');
 
@@ -15,6 +16,8 @@ function task(entry, out, watch) {
       fast: true
     }).transform(babelify.configure({
       presets: ['es2015']
+    })).transform(globalShim.configure({
+      'pixi.js': 'PIXI'
     }));
 
     function compile() {
