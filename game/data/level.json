@@ -1,0 +1,10 @@
+[
+    {
+        "name": "level0",
+        "sublevels": [
+            "sublevel0",
+            "sublevel1",
+            "sublevel2"
+        ]
+    }
+]

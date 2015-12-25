@@ -1,0 +1,14 @@
+.datagrep-headerbar {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.datagrep-logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.delete-focus-bg {
+    &:focus, &:hover{
+        background: none;
+    }
+}

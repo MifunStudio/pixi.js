@@ -27,7 +27,9 @@ export class LevelScene extends PIXI.Container {
         }
 
         this.on('tap', (e) => {
+            console.log(e);
             if(e.target.name.indexOf('level') === 0) {
+                console.log('level.click');
                 this.emit('level.click', e.target.level);
             }
         });

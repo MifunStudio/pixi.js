@@ -1,0 +1,14 @@
+{
+    "sublevel0": {
+        "preDialogue": "dialogue0",
+        "rearDialogue": "dialogue1"
+    },
+    "sublevel1": {
+        "preDialogue": "dialogue0",
+        "rearDialogue": "dialogue1"
+    },
+    "sublevel2": {
+        "preDialogue": "dialogue0",
+        "rearDialogue": "dialogue1"
+    }
+}
