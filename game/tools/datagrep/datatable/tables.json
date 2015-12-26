@@ -1,0 +1,7 @@
+[
+  {
+    "tableName": "cccc",
+    "columns": "[{\"text\":\"adsf\",\"columnType\":\"string\",\"dataIndex\":\"adsf\"},{\"text\":\"12312\",\"columnType\":\"int\",\"dataIndex\":\"12312\"}]",
+    "id": "datagrep.model.DataTable-1"
+  }
+]

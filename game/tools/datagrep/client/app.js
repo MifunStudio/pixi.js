@@ -9,7 +9,7 @@ Ext.application({
     extend: 'datagrep.Application',
 
     requires: [
-        'datagrep.view.main.Viewport'
+        'datagrep.*'
     ],
 
     // The name of the initial view to create. With the classic toolkit this class

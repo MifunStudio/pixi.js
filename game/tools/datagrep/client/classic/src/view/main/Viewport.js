@@ -37,22 +37,41 @@ Ext.define('datagrep.view.main.Viewport', {
                     width: 150
                 },
                 {
-                    margin: '0 0 0 8',
-                    cls: 'delete-focus-bg',
-                    iconCls:'x-fa fa-navicon',
-                    id: 'main-navigation-btn',
-                    handler: 'onToggleNavigationSize'
-                },
-                {
                     xtype: 'tbspacer',
                     flex: 1
                 }
             ]
         },
         {
-            xtype: 'container',
-            id: 'maincontainer',
-            flex: 1
+            xtype: 'maincontainerwrap',
+            id: 'maincontainerwrap',
+            flex: 1,
+            items: [
+                {
+                    xtype: 'treelist',
+                    reference: 'navigationTreeList',
+                    itemId: 'navigationTreeList',
+                    ui: 'navigation',
+                    store: 'NavigationTree',
+                    width: 150,
+                    expanderFirst: false,
+                    expanderOnly: false,
+                    listeners: {
+                        selectionchange: 'onNavigationTreeSelectionChange'
+                    }
+                },
+                {
+                    xtype: 'container',
+                    flex: 1,
+                    reference: 'mainCardPanel',
+                    cls: 'datagrep-right-main-container',
+                    itemId: 'contentPanel',
+                    layout: {
+                        type: 'card',
+                        anchor: '100%'
+                    }
+                }
+            ]
         }
     ]
 });
