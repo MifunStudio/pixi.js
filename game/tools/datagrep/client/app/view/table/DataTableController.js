@@ -52,8 +52,8 @@ Ext.define('datagrep.view.table.DataTableController', {
     },
 
     onTableSelectionChange: function(combo, model) {
-        this.updateTableGrid(model);
         this.selectedTableModel = model;
+        this.updateTableGrid(model);
     },
 
     onSubmitAddColumn: function(data) {
@@ -61,15 +61,26 @@ Ext.define('datagrep.view.table.DataTableController', {
             refs = me.getReferences(),
             tableCombobox = refs.tableCombobox,
             columnName = data.columnName,
-            columnType = data.columnType;
+            columnType = data.columnType,
+            columnDisplayName = data.columnDisplayName;
 
         if(me.selectedTableModel) {
             me.selectedTableModel.addColumn({
-                text: columnName,
+                text: columnDisplayName || columnName,
                 columnType: columnType,
                 dataIndex: columnName
             });
             me.updateTableGrid(me.selectedTableModel);
+        }
+    },
+
+    onSaveBtnClick: function() {
+        if(this.gridStore) {
+            this.gridStore.save({
+                params: {
+                    table: this.selectedTableModel.get('tableName')
+                }
+            });
         }
     },
 
@@ -93,10 +104,10 @@ Ext.define('datagrep.view.table.DataTableController', {
                 name: column.dataIndex
             });
         });
-        var store = Ext.create('Ext.data.Store', {
+        var store = Ext.create('datagrep.view.table.store.SingleTable', {
             fields: fields
         });
-        columns = columns.slice(0);
+        columns = JSON.parse(JSON.stringify(columns));
         columns.forEach(function(column) {
             column.editor = editorsStore.createEditor(column.columnType);
         });
@@ -113,6 +124,7 @@ Ext.define('datagrep.view.table.DataTableController', {
                 tooltip: '删除此行',
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
+                    rec.drop();
                 }
             }]
         });
@@ -122,6 +134,48 @@ Ext.define('datagrep.view.table.DataTableController', {
             disabled: true
         });
         tableGrid.reconfigure(store, columns);
-        this.gridStore = store;
+        store.load({
+            params: {
+                table: me.selectedTableModel.get('tableName')
+            }
+        });
+        if(me.gridStore) {
+            me.gridStore.each(function(record) {
+                store.add(record);
+            });
+        }
+        me.gridStore = store;
+    }
+});
+
+Ext.define('datagrep.view.table.store.SingleTable', {
+    extend: 'Ext.data.Store',
+    alias: 'store.singletable',
+    proxy: {
+        type: 'ajax',
+        api: {
+            create: '/datatable/saveTable',
+            read: '/datatable/loadTable'
+        },
+        reader: {
+            type: 'json',
+            successProperty: 'success',
+            rootProperty: 'data'
+        },
+        writer: {
+            type: 'json',
+            successProperty: 'success',
+            rootProperty: 'data',
+            writeAllFields: true
+        }
+    },
+    getNewRecords: function() {
+        return this.getDataSource().items.slice(0);
+    },
+    getRemovedRecords: function() {
+        return [];
+    },
+    getUpdatedRecords: function() {
+        return [];
     }
 });

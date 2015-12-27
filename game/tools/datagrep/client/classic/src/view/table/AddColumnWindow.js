@@ -23,7 +23,12 @@ Ext.define('datagrep.view.table.AddColumnWindow', {
             items: [{
                 xtype: 'textfield',
                 name: 'columnName',
-                fieldLabel: '列名称',
+                fieldLabel: '列属性',
+                value: ''
+            }, {
+                xtype: 'textfield',
+                name: 'columnDisplayName',
+                fieldLabel: '显示名称',
                 value: ''
             }, {
                 xtype: 'combobox',
@@ -33,7 +38,7 @@ Ext.define('datagrep.view.table.AddColumnWindow', {
                 valueField: 'type',
                 name: 'columnType',
                 fieldLabel: '数值类型',
-                value: '字符串',
+                value: 'string',
                 editable: false
             }]
         }];

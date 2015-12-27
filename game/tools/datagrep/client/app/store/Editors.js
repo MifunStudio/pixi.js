@@ -31,8 +31,8 @@ Ext.define('datagrep.store.Editors', {
                     typeAhead: true,
                     triggerAction: 'all',
                     store: [
-                        [true],
-                        [false]
+                        ['true', true],
+                        ['false', false]
                     ]
                 });
             break;

@@ -47,12 +47,16 @@ Ext.define('datagrep.view.table.DataTable', {
             handler: 'onRemoveTableBtnClick'
         }, '-', {
             iconCls: 'right-icon new-icon x-fa fa-file',
-            text: '新建列',
+            text: '添加列',
             handler: 'onAddColumnBtnClick'
         }, {
             iconCls: 'right-icon new-icon x-fa fa-file',
             text: '添加行',
             handler: 'onAddRowBtnClick'
+        }, {
+            iconCls: 'right-icon new-icon x-fa fa-file',
+            text: '保存表格',
+            handler: 'onSaveBtnClick'
         }];
 
         me.cellEditing = new Ext.grid.plugin.CellEditing({

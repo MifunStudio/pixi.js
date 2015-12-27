@@ -6,7 +6,6 @@ Ext.define('datagrep.model.DataTable', {
     ],
 
     getColumns: function() {
-        console.log(JSON.parse(this.get('columns')));
         return JSON.parse(this.get('columns'));
     },
 
