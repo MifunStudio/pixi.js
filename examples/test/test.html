@@ -53,6 +53,12 @@ bunny2.onDrop = function(e) {
 };
 stage.addChild(bunny2);
 
+bunny2.tween(true).to({
+    x: 200
+}, 1000).to({
+    x: 100
+}, 1000).repeat(100);
+
 </script>
 </body>
 </html>

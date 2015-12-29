@@ -182,6 +182,28 @@ Object.defineProperties(DisplayObject.prototype, {
         }
     },
 
+    scaleX: {
+        get: function ()
+        {
+            return this.scale.x;
+        },
+        set: function (value)
+        {
+            this.scale.x = value;
+        }
+    },
+
+    scaleY: {
+        get: function ()
+        {
+            return this.scale.y;
+        },
+        set: function (value)
+        {
+            this.scale.y = value;
+        }
+    },
+
     /**
      * Indicates if the sprite is globally visible.
      *

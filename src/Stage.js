@@ -1,3 +1,4 @@
+var TWEEN = require('tween.js');
 var core = require('./core');
 var sharedTicker = core.ticker.shared;
 var Viewport = require('./Viewport').Viewport;
@@ -70,6 +71,7 @@ Stage.prototype.emit = function() {
 
 Stage.prototype.runStep = function() {
     this.renderer.render(this);
+    TWEEN.update(this.ticker.lastTime);
 };
 
 module.exports = Stage;
