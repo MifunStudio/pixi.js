@@ -9,7 +9,6 @@ require('./cacheAsBitmap');
 require('./getChildByName');
 require('./getGlobalPosition');
 require('./eventBubbles');
-require('./tween');
 
 /**
  * @namespace PIXI.extras

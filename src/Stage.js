@@ -1,4 +1,4 @@
-var TWEEN = require('tween.js');
+var Tween = require('./tween').Tween;
 var core = require('./core');
 var sharedTicker = core.ticker.shared;
 var Viewport = require('./Viewport').Viewport;
@@ -71,7 +71,7 @@ Stage.prototype.emit = function() {
 
 Stage.prototype.runStep = function() {
     this.renderer.render(this);
-    TWEEN.update(this.ticker.lastTime);
+    Tween.tick(this.ticker.elapsedMS);
 };
 
 module.exports = Stage;

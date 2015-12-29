@@ -12,6 +12,8 @@ core.mesh           = require('./mesh');
 
 // export mifun custom modules
 core.Stage = require('./Stage');
+core.Ease = require('./tween/index').Ease;
+core.Tween = require('./tween/index').Tween;
 core.Viewport = require('./Viewport').Viewport;
 core.FixedWidthViewport = require('./Viewport').FixedWidthViewport;
 

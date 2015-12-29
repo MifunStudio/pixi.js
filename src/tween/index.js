@@ -1,4 +1,6 @@
-var TWEEN = require('tween.js');
+var Tween = require('./Tween');
+var Ease = require('./Ease');
+
 var core = require('../core'),
     sharedTicker = core.ticker.shared,
     DisplayObject = core.DisplayObject;
@@ -82,17 +84,14 @@ DisplayObject.prototype.tween = function(clearTweens) {
     if(clearTweens) {
         this.clearTweens();
     }
-    this._tweens = this._tweens || {};
-    tween = new TWEEN.Tween(this.tweenTransform);
-    tween.start(sharedTicker.lastTime);
-    this._tweens[genTweenId()] = tween;
-    return tween;
+    return Tween.get(this.tweenTransform);
 };
 
 DisplayObject.prototype.clearTweens = function() {
-    this._tweens = this._tweens || {};
-    for(var id in this._tweens) {
-        TWEEN.remove(this._tweens[id]);
-    }
-    this._tweens = {};
+    Tween.removeTweens(this.tweenTransform);
+};
+
+module.exports = {
+    Tween: Tween,
+    Ease: Ease
 };
