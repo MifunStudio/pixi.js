@@ -1,5 +1,6 @@
 var TWEEN = require('tween.js');
 var core = require('../core'),
+    sharedTicker = require('./ticker').shared,
     DisplayObject = core.DisplayObject;
 
 var genTweenId = (function() {
@@ -83,7 +84,7 @@ DisplayObject.prototype.tween = function(clearTweens) {
     }
     this._tweens = this._tweens || {};
     tween = new TWEEN.Tween(this.tweenTransform);
-    tween.start();
+    tween.start(sharedTicker.lastTime);
     this._tweens[genTweenId()] = tween;
     return tween;
 };
