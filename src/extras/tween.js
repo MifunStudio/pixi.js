@@ -1,6 +1,6 @@
 var TWEEN = require('tween.js');
 var core = require('../core'),
-    sharedTicker = require('./ticker').shared,
+    sharedTicker = core.ticker.shared,
     DisplayObject = core.DisplayObject;
 
 var genTweenId = (function() {
