@@ -15,6 +15,9 @@ var genTweenId = (function() {
 function TweenTransform(displayObject) {
     this.displayObject = displayObject;
 }
+
+TweenTransform.prototype.tweenjs_count = 0;
+
 Object.defineProperties(TweenTransform.prototype, {
     x: {
         get: function() {
