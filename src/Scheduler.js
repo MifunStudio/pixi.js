@@ -94,6 +94,7 @@ function scheduleInterval(task, time, args) {
 
 function scheduleFrame(task, frame, args) {
     var scheduleId = genId();
+    frame = frame || 0;
     schedules[scheduleId] = {
         task : task,
         frame : frame,

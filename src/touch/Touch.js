@@ -212,8 +212,9 @@ Touch.prototype._getUnderPointObject = function(target, x, y) {
 
 Touch.prototype._dispatchEvent = function(target, e) {
     e.setTarget(target);
-    target.emit(e.type, e);
-
+    this._stage.scheduler.frame(() => {
+        target.emit(e.type, e);
+    });
 };
 
 module.exports = Touch;
