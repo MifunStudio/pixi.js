@@ -1,6 +1,7 @@
 var Tween = require('./tween').Tween;
 var core = require('./core');
 var sharedTicker = core.ticker.shared;
+var Scheduler = require('./Scheduler');
 var Viewport = require('./Viewport').Viewport;
 var Container = core.Container;
 var Touch = require('./touch').Touch;
@@ -17,6 +18,7 @@ function Stage(options) {
         gestures: this.gestures || (options.dragAndDrop ? 'tap panstart panmove panend pancancel' : 'tap')
     }, options);
     this._ticker = sharedTicker;
+    this._scheduler = Scheduler;
     this._renderer = core.autoDetectRenderer(960, 640, {
         view: this._options.view,
         backgroundColor: this._options.backgroundColor
@@ -38,6 +40,11 @@ Object.defineProperties(Stage.prototype, {
     ticker: {
         get: function() {
             return this._ticker;
+        }
+    },
+    scheduler: {
+        get: function() {
+            return this._scheduler;
         }
     },
     renderer: {
@@ -72,6 +79,7 @@ Stage.prototype.emit = function() {
 Stage.prototype.runStep = function() {
     this.renderer.render(this);
     Tween.tick(this.ticker.elapsedMS);
+    Scheduler.runSchedule(this.ticker.elapsedMS);
 };
 
 module.exports = Stage;
