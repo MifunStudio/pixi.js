@@ -51,11 +51,13 @@ module.exports = function() {
                                 var rows = tileset.tilecount/columns;
                                 var tw = tileset.tilewidth;
                                 var th = tileset.tileheight;
+                                var firstgid = tileset.firstgid;
                                 for(var col=0; col<columns; col++) {
                                     for(var row=0; row<rows; row++) {
+                                        var gid = firstgid + col * row + col;
                                         var size = new core.Rectangle(col*tw, row*th, tw, th);
                                         var texture = new core.Texture(baseTexture, size, size.clone(), null, false);
-                                        core.utils.TextureCache[imageId] = texture;
+                                        core.utils.TextureCache[imageId + '/' + gid] = texture;
                                     }
                                 }
                             }
