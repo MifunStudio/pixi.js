@@ -27,7 +27,3 @@ examples_old/
 
 # jetBrains IDE ignores
 .idea
-
-bin
-
-game/tools/datagrep/client/build
