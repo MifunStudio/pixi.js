@@ -11,7 +11,7 @@ core.loaders        = require('./loaders');
 core.mesh           = require('./mesh');
 
 // export mifun custom modules
-
+core.Event = core.extras.Event;
 core.Stage = require('./Stage');
 core.Scheduler = require('./Scheduler');
 core.Ease = require('./tween/index').Ease;
