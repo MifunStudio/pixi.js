@@ -15,13 +15,19 @@ function Stage(options) {
     this._options = Object.assign({
         touchEanbled: true,
         dragAndDrop: false,
-        gestures: this.gestures || (options.dragAndDrop ? 'tap panstart panmove panend pancancel' : 'tap')
+        gestures: this.gestures || (options.dragAndDrop ? 'tap panstart panmove panend pancancel' : 'tap'),
+        resolution: 1,
+        preserveDrawingBuffer: false
     }, options);
+
     this._ticker = sharedTicker;
     this._scheduler = Scheduler;
+
     this._renderer = core.autoDetectRenderer(960, 640, {
         view: this._options.view,
-        backgroundColor: this._options.backgroundColor
+        backgroundColor: this._options.backgroundColor,
+        preserveDrawingBuffer: this._options.preserveDrawingBuffer,
+        resolution: this._options.resolution
     });
     this._viewport = options.viewport || new Viewport(960, 640);
     this._viewport._init(this);
