@@ -26,3 +26,8 @@ DisplayObject.prototype.emit = function(type, evt) {
         this.displayObjectEmit.apply(this, arguments);
     }
 };
+
+DisplayObject.prototype.emitEvent(type, bubbles, data) {
+    var event = new Event(type, bubbles, data);
+    this.emit(type, event);
+};
