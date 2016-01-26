@@ -6,8 +6,7 @@ function genId() {
 }
 
 function runSchedule(deltaTime) {
-    var scheduleId, scheduleItem, schedules;
-    schedules = schedules;
+    var scheduleId, scheduleItem;
     for(scheduleId in schedules) {
         if(schedules.hasOwnProperty(scheduleId)) {
             scheduleItem = schedules[scheduleId];
