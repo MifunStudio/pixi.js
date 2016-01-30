@@ -26,7 +26,7 @@ function Stage(options) {
 
     this._renderer = core.autoDetectRenderer(960, 640, {
         view: this._options.view,
-        antialias: this.options.antialias,
+        antialias: this._options.antialias,
         backgroundColor: this._options.backgroundColor,
         preserveDrawingBuffer: this._options.preserveDrawingBuffer,
         resolution: this._options.resolution
