@@ -17,6 +17,7 @@ function Stage(options) {
         dragAndDrop: false,
         gestures: this.gestures || (options.dragAndDrop ? 'tap panstart panmove panend pancancel' : 'tap'),
         resolution: 1,
+        antialias: true,
         preserveDrawingBuffer: false
     }, options);
 
@@ -25,6 +26,7 @@ function Stage(options) {
 
     this._renderer = core.autoDetectRenderer(960, 640, {
         view: this._options.view,
+        antialias: this.options.antialias,
         backgroundColor: this._options.backgroundColor,
         preserveDrawingBuffer: this._options.preserveDrawingBuffer,
         resolution: this._options.resolution
