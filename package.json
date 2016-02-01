@@ -1,6 +1,6 @@
 {
   "name": "@mifunstudio/pixi.js",
-  "version": "3.1.4",
+  "version": "3.2.1",
   "description": "Pixi.js is a fast lightweight 2D library that works across all devices.",
   "author": "Mat Groves",
   "contributors": [
@@ -37,8 +37,7 @@
     "gulp-header": "^1.7.1",
     "hammerjs": "^2.0.4",
     "object-assign": "^4.0.1",
-    "resource-loader": "^1.6.2",
-    "tween.js": "^16.3.1"
+    "resource-loader": "^1.6.2"
   },
   "devDependencies": {
     "browserify": "^11.1.0",

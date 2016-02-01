@@ -18,7 +18,8 @@ function Stage(options) {
         gestures: this.gestures || (options.dragAndDrop ? 'tap panstart panmove panend pancancel' : 'tap'),
         resolution: 1,
         antialias: true,
-        preserveDrawingBuffer: false
+        preserveDrawingBuffer: false,
+        webgl: true
     }, options);
 
     this._ticker = sharedTicker;
@@ -30,7 +31,7 @@ function Stage(options) {
         backgroundColor: this._options.backgroundColor,
         preserveDrawingBuffer: this._options.preserveDrawingBuffer,
         resolution: this._options.resolution
-    });
+    }, !this._options.webgl);
     this._viewport = options.viewport || new Viewport(960, 640);
     this._viewport._init(this);
     this._touch = new Touch(this, this._options.gestures);
@@ -86,7 +87,6 @@ Stage.prototype.emit = function() {
 
 Stage.prototype.runStep = function() {
     this.renderer.render(this);
-    Tween.tick(this.ticker.elapsedMS);
     Scheduler.runSchedule(this.ticker.elapsedMS);
 };
 
