@@ -19,7 +19,7 @@ DisplayObject.prototype.emit = function(type, evt) {
         evt.setCurrentTarget(this);
         this.displayObjectEmit(type, evt);
         var bubbleParent = this.bubbleParent;
-        if(bubbleParent) {
+        if(bubbleParent && bubbleParent.emit) {
             bubbleParent.emit(type, evt);
         }
     } else {
