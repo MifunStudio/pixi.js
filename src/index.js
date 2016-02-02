@@ -11,6 +11,7 @@ core.loaders        = require('./loaders');
 core.mesh           = require('./mesh');
 
 // export mifun custom modules
+core.touch = require('./touch');
 core.Event = core.extras.Event;
 core.Stage = require('./Stage');
 core.Scheduler = require('./Scheduler');

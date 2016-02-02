@@ -13,9 +13,18 @@ function Touch(stage, gestures) {
     this.enabled = true;
     this._stage = stage;
     this._channelMap = {};
-    this._hammer = new Hammer(stage.renderer.view);
+    this._initHammer(gestures);
+}
+
+Touch.prototype.constructor = Touch;
+
+Touch.prototype._initHammer = function(gestures) {
+    var me = this;
+    this._hammer = new Hammer(this._stage.renderer.view);
     this._hammer.get('pan').set({ threshold: 0 });
-    this._hammer.on(this._parseGestrues(gestures), function(e) {
+    this._hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+    this._hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+    this._hammer.on(this._parseGestrues(gestures), (e) => {
         if(e.type === 'pan') return;
         if(e.type === 'hammer.input' && !e.isFinal && !e.isFirst) {
             return;
@@ -24,9 +33,7 @@ function Touch(stage, gestures) {
             me._onHammerEvent(e);
         }
     });
-}
-
-Touch.prototype.constructor = Touch;
+};
 
 Touch.prototype._parseGestrues = function(gestures) {
     gestures = gestures || 'tap';
@@ -48,7 +55,7 @@ Touch.prototype._onHammerEvent = function(e) {
         stage = this._stage;
 
     var me = this;
-    var isFinalButNotHammerIpnut = type !== 'hammer.input' && e.isFinal;
+    var isFinalButNotHammerInput = type !== 'hammer.input' && e.isFinal;
     var viewClientRect = this._stage.renderer.view.getBoundingClientRect();
     var viewWidth = this._stage.renderer.view.width;
     var viewHeight = this._stage.renderer.view.height;
@@ -105,14 +112,9 @@ Touch.prototype._onHammerEvent = function(e) {
 
             channel = me._channelMap[identifier];
             if(channel) {
-                channel.onHammerEvent(e, target, x, y, identifier);
+                channel.onHammerEvent(e, target, x, y, identifier, isFinalButNotHammerInput);
             }
         }
-    }
-
-    // do clear channel
-    if(isFinalButNotHammerIpnut) {
-        delete me._channelMap[identifier];
     }
 };
 
@@ -121,7 +123,7 @@ Touch.prototype._createDispatchChannel = function(touchTarget) {
     var stage = me._stage;
     var touchMoveDetection = true;
     return {
-        onHammerEvent : function(e, target, x, y, identifier) {
+        onHammerEvent : function(e, target, x, y, identifier, isFinalButNotHammerInput) {
             var touchEvent,
                 type = e.type;
 
@@ -164,7 +166,7 @@ Touch.prototype._createDispatchChannel = function(touchTarget) {
                 identifier : identifier,
                 touchMoveDetection : false
             });
-            me._dispatchEvent(touchTarget, touchEvent);
+            me._dispatchEvent(touchTarget, touchEvent, isFinalButNotHammerInput);
             touchMoveDetection = touchEvent.touchMoveDetection;
         }
     };
@@ -210,9 +212,13 @@ Touch.prototype._getUnderPointObject = function(target, x, y) {
     }
 };
 
-Touch.prototype._dispatchEvent = function(target, e) {
+Touch.prototype._dispatchEvent = function(target, e, isFinalButNotHammerInput) {
     e.setTarget(target);
     this._stage.scheduler.frame(() => {
+        // do clear channel
+        if(isFinalButNotHammerInput) {
+            delete this._channelMap[identifier];
+        }
         target.emit(e.type, e);
     });
 };
