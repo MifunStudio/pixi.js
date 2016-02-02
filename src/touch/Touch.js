@@ -166,7 +166,7 @@ Touch.prototype._createDispatchChannel = function(touchTarget) {
                 identifier : identifier,
                 touchMoveDetection : false
             });
-            me._dispatchEvent(touchTarget, touchEvent, isFinalButNotHammerInput);
+            me._dispatchEvent(touchTarget, touchEvent, identifier, isFinalButNotHammerInput);
             touchMoveDetection = touchEvent.touchMoveDetection;
         }
     };
@@ -212,7 +212,7 @@ Touch.prototype._getUnderPointObject = function(target, x, y) {
     }
 };
 
-Touch.prototype._dispatchEvent = function(target, e, isFinalButNotHammerInput) {
+Touch.prototype._dispatchEvent = function(target, e, identifier, isFinalButNotHammerInput) {
     e.setTarget(target);
     this._stage.scheduler.frame(() => {
         // do clear channel
