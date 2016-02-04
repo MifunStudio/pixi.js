@@ -213,11 +213,12 @@ Touch.prototype._getUnderPointObject = function(target, x, y) {
 };
 
 Touch.prototype._dispatchEvent = function(target, e, identifier, isFinalButNotHammerInput) {
+    var me = this;
     e.setTarget(target);
-    this._stage.scheduler.frame(() => {
+    me._stage.scheduler.frame(function() {
         // do clear channel
         if(isFinalButNotHammerInput) {
-            delete this._channelMap[identifier];
+            delete me._channelMap[identifier];
         }
         target.emit(e.type, e);
     });
