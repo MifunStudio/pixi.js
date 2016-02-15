@@ -24,7 +24,7 @@ Touch.prototype._initHammer = function(gestures) {
     this._hammer.get('pan').set({ threshold: 0 });
     this._hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
     this._hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-    this._hammer.on(this._parseGestrues(gestures), (e) => {
+    this._hammer.on(this._parseGestrues(gestures), function(e) {
         if(e.type === 'pan') return;
         if(e.type === 'hammer.input' && !e.isFinal && !e.isFirst) {
             return;
