@@ -56,7 +56,28 @@ FixedWidthViewport.prototype.resizeViewport = function(screenWidth, screenHeight
     });
 };
 
+function FixedHeightViewport(fixedHeight) {
+    Viewport.call(this);
+    this._fixedHeight = fixedHeight;
+}
+
+FixedHeightViewport.prototype = Object.create(Viewport.prototype);
+FixedHeightViewport.prototype.constructor = FixedHeightViewport;
+
+FixedHeightViewport.prototype.resizeViewport = function(screenWidth, screenHeight) {
+    var height = this._fixedHeight;
+    var width = Math.ceil(screenWidth * height / screenHeight);
+    this._stage.renderer.resize(width, height);
+    this._width = width;
+    this._height = height;
+    this._stage.emit('viewport.resize', {
+        width: width,
+        height: height
+    });
+};
+
 module.exports = {
     Viewport: Viewport,
-    FixedWidthViewport: FixedWidthViewport
+    FixedWidthViewport: FixedWidthViewport,
+    FixedHeightViewport: FixedHeightViewport
 };

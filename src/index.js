@@ -19,6 +19,7 @@ core.Ease = require('./tween/index').Ease;
 core.Tween = require('./tween/index').Tween;
 core.Viewport = require('./Viewport').Viewport;
 core.FixedWidthViewport = require('./Viewport').FixedWidthViewport;
+core.FixedHeightViewport = require('./Viewport').FixedHeightViewport;
 
 // export a premade loader instance
 /**
