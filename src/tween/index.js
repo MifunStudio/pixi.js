@@ -18,7 +18,7 @@ Tween._register = function(tween, value) {
 
 Tween.prototype.callRemove = function() {
     var self = this;
-    this.call(function() {
+    return this.call(function() {
         self.tweenTransform.removeTween(self);
     });
 }
